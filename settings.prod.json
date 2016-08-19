@@ -1,0 +1,11 @@
+{
+  "port": 3000,
+  "logLevel": "DEBUG",
+  "logFile": "/Users/Moy/NodeJSProjects/ezybucket-api/logs/log.out",
+  "db":{
+    "dialect": "mysql",
+    "url": "",
+    "username": "",
+    "password": ""
+  }
+}
