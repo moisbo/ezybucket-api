@@ -9,7 +9,8 @@ var user = require('./user');
 var Bucket = sequelize.define('bucket', {
     idbucket: {
         type: Sequelize.INTEGER,
-        primaryKey: true
+        primaryKey: true,
+        autoIncrement: true
     },
     bucket: {
         type: Sequelize.STRING,
@@ -41,8 +42,32 @@ module.exports.createBucket = createBucket;
 
 function getBuckets(user) {
     return Bucket.findAll({
-        user_iduser: user.iduser
+        where: {
+            user_iduser: user.iduser
+        }
     });
 }
 
 module.exports.getBuckets = getBuckets;
+
+function deleteBucket(idbucket) {
+    return Bucket.destroy({
+        where:{
+            idbucket: idbucket
+        }
+    });
+}
+
+module.exports.deleteBucket = deleteBucket;
+
+function updateBucket(bucket) {
+    return Bucket.update({
+        bucket: bucket.bucket
+    },{
+        where:{
+            idbucket: bucket.idbucket
+        }
+    });
+}
+
+module.exports.updateBucket = updateBucket;

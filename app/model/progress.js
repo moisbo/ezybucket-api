@@ -9,7 +9,8 @@ var bucket = require('./bucket');
 var Progress = sequelize.define('progress', {
     idprogress: {
         type: Sequelize.INTEGER,
-        primaryKey: true
+        primaryKey: true,
+        autoIncrement: true
     },
     progress: {
         type: Sequelize.STRING,
@@ -29,6 +30,16 @@ var Progress = sequelize.define('progress', {
 
 module.exports.Progress = Progress;
 
+function getProgress(bucket) {
+    return Progress.findAll({
+        where:{
+            bucket_idbucket: bucket.idbucket
+        }
+    });
+}
+
+module.exports.getProgress = getProgress;
+
 function createProgress(progress) {
     return Progress.create({
         progress: progress.progress,
@@ -38,10 +49,24 @@ function createProgress(progress) {
 
 module.exports.createProgress = createProgress;
 
-function getProgress(bucket) {
-    return Progress.findAll({
-        bucket_idbucket: bucket.idbucket
+function deleteProgress(idprogress) {
+    return Progress.destroy({
+        where:{
+            idprogress: idprogress
+        }
     });
 }
 
-module.exports.getProgress = getProgress;
+module.exports.deleteProgress = deleteProgress;
+
+function updateProgress(progress) {
+    return Progress.update({
+        progress: progress.progress
+    },{
+        where:{
+            idprogress: progress.idprogress
+        }
+    });
+}
+
+module.exports.updateProgress = updateProgress;

@@ -36,8 +36,8 @@ app.post('/user', (req, res) => {
         });
 });
 
-app.get('/user/:username', (req, res) => {
-    user.getUser({username: req.params.username})
+app.get('/user/:iduser', (req, res) => {
+    user.getUser({iduser: req.params.iduser})
         .then( (response) => {
             console.log(response);
             res.status(200).json(response);
@@ -52,6 +52,18 @@ app.post('/bucket', (req, res) => {
     var bucketObj = req.body;
     bucket.createBucket(bucketObj)
         .then( (response) => {
+            console.log(response.dataValues);
+            res.status(200).json(response.dataValues);
+        })
+        .catch( (err) => {
+            console.log(err);
+            res.status(400).json(err);
+        });
+});
+
+app.get('/buckets/:iduser', (req, res) => {
+    bucket.getBuckets({iduser: req.params.iduser})
+        .then( (response) => {
             console.log(response);
             res.status(200).json(response);
         })
@@ -61,8 +73,21 @@ app.post('/bucket', (req, res) => {
         });
 });
 
-app.get('/buckets/:iduser', (req, res) => {
-    bucket.getBuckets({user: req.params.iduser})
+app.get('/bucket/delete/:idbucket', (req, res) => {
+    bucket.deleteBucket(req.params.idbucket)
+        .then( (response) => {
+            console.log(response);
+            res.status(200).json(response);
+        })
+        .catch( (err) => {
+            console.log(err);
+            res.status(400).json(err);
+        });
+});
+
+app.post('/bucket/update/', (req, res) => {
+    var bucketObj = req.body;
+    bucket.updateBucket(bucketObj)
         .then( (response) => {
             console.log(response);
             res.status(200).json(response);
@@ -86,8 +111,33 @@ app.post('/progress', (req, res) => {
         });
 });
 
-app.get('/progress/:idprogress', (req, res) => {
-    progress.getProgress({progress: req.params.idprogress})
+app.get('/progress/:idbucket', (req, res) => {
+    progress.getProgress({idbucket: req.params.idbucket})
+        .then( (response) => {
+            console.log(response);
+            res.status(200).json(response);
+        })
+        .catch( (err) => {
+            console.log(err);
+            res.status(400).json(err);
+        });
+});
+
+app.get('/progress/delete/:idprogress', (req, res) => {
+    progress.deleteProgress(req.params.idprogress)
+        .then( (response) => {
+            console.log(response);
+            res.status(200).json(response);
+        })
+        .catch( (err) => {
+            console.error(err);
+            res.status(400).json(err);
+        });
+});
+
+app.post('/progress/update/', (req, res) => {
+    var progressObj = req.body;
+    progress.updateProgress(progressObj)
         .then( (response) => {
             console.log(response);
             res.status(200).json(response);
@@ -123,9 +173,21 @@ app.get('/comment/:idcomment', (req, res) => {
         });
 });
 
-app.post('/comment/update', (req, res) => {
+app.get('/comment/delete/:idcomment', (req, res) => {
+    comment.deleteComment(req.params.idcomment)
+        .then( (response) => {
+            console.log(response);
+            res.status(200).json(response);
+        })
+        .catch( (err) => {
+            console.log(err);
+            res.status(400).json(err);
+        });
+});
+
+app.post('/comment/update/', (req, res) => {
     var commentObj = req.body;
-    comment.updateComment(commentObj.idcomment, commentObj.obj)
+    comment.updateComment(commentObj)
         .then( (response) => {
             console.log(response);
             res.status(200).json(response);

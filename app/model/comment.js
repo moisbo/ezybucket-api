@@ -9,7 +9,8 @@ var progress = require('./progress');
 var Comment = sequelize.define('comment', {
     idcomment: {
         type: Sequelize.INTEGER,
-        primaryKey: true
+        primaryKey: true,
+        autoIncrement: true
     },
     comment: {
         type: Sequelize.STRING,
@@ -35,6 +36,16 @@ var Comment = sequelize.define('comment', {
     freezeTableName: true
 });
 
+function getComments(progress) {
+    return Comment.findAll({
+        where:{
+            progress_idprogress: progress.idprogress
+        }
+    });
+}
+
+module.exports.getComments = getComments;
+
 function createComment(comment) {
     return Comment.create({
         comment: comment.comment,
@@ -44,18 +55,22 @@ function createComment(comment) {
 
 module.exports.createComment = createComment;
 
-function getComments(progress) {
-    return Comment.findAll({
-        progress_idprogress: progress.idprogress
+function deleteComment(idcomment) {
+    return Comment.destroy({
+        where:{
+            idcomment: idcomment
+        }
     });
 }
 
-module.exports.getComments = getComments;
+module.exports.deleteComment = deleteComment;
 
-function updateComment(idcomment, obj) {
-    return Comment.update(obj,{
+function updateComment(comment) {
+    return Comment.update({
+        comment: comment.comment
+    },{
         where:{
-            idcomment: idcomment
+            idcomment: comment.idcomment
         }
     });
 }
