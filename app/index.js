@@ -161,8 +161,8 @@ app.post('/comment', (req, res) => {
         });
 });
 
-app.get('/comment/:idcomment', (req, res) => {
-    comment.getComments({comment: req.params.idcomment})
+app.get('/comment/:idprogress', (req, res) => {
+    comment.getComments({idprogress: req.params.idprogress})
         .then( (response) => {
             console.log(response);
             res.status(200).json(response);
