@@ -19,7 +19,10 @@ To install:
 - verify: ports, database url, user and password, in settings.dev.json and settings.prod.json
 - to test run `gulp serve-dev` to test in `http://localhost:3000`
 - to lint run `gulp`
+- Environment variables are only needed for production API
+ In a `.env` file: process.env.PORT, process.env.ISPROD, process.env.DBURL, process.env.DBUSERNAME, process.env.DBPASSWORD (see app.config.js)
 
 ### TODOS
+
 - Handle users
 - Handle errors
