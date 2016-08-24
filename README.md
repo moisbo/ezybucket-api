@@ -14,6 +14,7 @@ For example:
 
 To install:
 
+- execute sql script in `db_install/ezybucketModel.sql` it will create dummy data iduser: 1
 - run `npm install`
 - verify: ports, database url, user and password, in settings.dev.json and settings.prod.json
 - to test run `gulp serve-dev` to test in `http://localhost:3000`
