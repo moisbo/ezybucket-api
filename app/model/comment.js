@@ -20,10 +20,6 @@ var Comment = sequelize.define('comment', {
         type: Sequelize.BLOB,
         field: 'picture'
     },
-    pictureDesc: {
-        type: Sequelize.STRING,
-        field: 'pictureDesc'
-    },
     progress_idprogress: {
         references: {
             model: progress.Progress,
@@ -76,3 +72,25 @@ function updateComment(comment) {
 }
 
 module.exports.updateComment = updateComment;
+
+function uploadImage(comment) {
+    return Comment.update({
+        picture: comment.picture
+    },{
+        where:{
+            idcomment: comment.idcomment
+        }
+    });
+}
+
+module.exports.uploadImage = uploadImage;
+
+function getImage(idcomment) {
+    return Comment.findOne({
+        where:{
+            idcomment: idcomment
+        }
+    });
+}
+
+module.exports.getImage = getImage;
