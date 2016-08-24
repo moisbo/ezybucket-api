@@ -2,6 +2,10 @@
   "name": "ezybucket-api",
   "version": "1.0.0",
   "description": "ezyBucket API for assignment",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/moisbo/ezybucket-api"
+  },
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
